@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ChuanPhat Manager</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="locked">
+<section id="login-screen" class="login-screen">
+    <form id="gate-login-form" class="login-card">
+        <img class="login-logo" src="assets/chuanphat-logo.svg" alt="Chuẩn Phát">
+        <div>
+            <h1>Đăng nhập ChuanPhat</h1>
+            <p>Quản lý bán hàng, kho, kế toán và chăm sóc khách hàng.</p>
+        </div>
+        <label>Tài khoản
+            <input name="username" placeholder="Nhập tài khoản" value="admin" autocomplete="username" required>
+        </label>
+        <label>Mật khẩu
+            <input name="password" type="password" placeholder="Nhập mật khẩu" value="123456" autocomplete="current-password" required>
+        </label>
+        <button class="primary">Đăng nhập</button>
+        <small>Tài khoản mẫu: admin / 123456</small>
+    </form>
+</section>
+
+<aside class="sidebar">
+    <div class="brand">
+        <img class="brand-logo" src="assets/chuanphat-logo.svg" alt="Chuẩn Phát">
+        <div>
+            <strong>ChuanPhat</strong>
+            <small>Xe điện & xe máy 50cc</small>
+        </div>
+    </div>
+
+    <nav>
+        <span class="nav-group">Bàn làm việc</span>
+        <button class="nav active" data-view="dashboard">Phân hệ / Tổng quan</button>
+        <button class="nav" data-view="reports">Báo cáo</button>
+
+        <span class="nav-group">Bán hàng</span>
+        <button class="nav" data-view="pos">Bán hàng / POS</button>
+        <button class="nav" data-view="customers">Khách hàng</button>
+        <button class="nav" data-view="marketing">Marketing</button>
+        <button class="nav" data-view="channels">Zalo/Facebook/TikTok</button>
+
+        <span class="nav-group">Kho & hàng hóa</span>
+        <button class="nav" data-view="products">Sản phẩm</button>
+        <button class="nav" data-view="inventory">Kho xe</button>
+        <button class="nav" data-view="purchases">Nhập hàng</button>
+        <button class="nav" data-view="suppliers">Nhà cung cấp</button>
+        <button class="nav" data-view="branches">Chi nhánh</button>
+
+        <span class="nav-group">Kế toán & hỗ trợ</span>
+        <button class="nav" data-view="accounting">Kế toán</button>
+        <button class="nav" data-view="service">Bảo hành</button>
+
+        <span class="nav-group">Hệ thống</span>
+        <button class="nav" data-view="users">Tài khoản</button>
+        <button class="nav" data-view="login-history">Lịch sử đăng nhập</button>
+        <button class="nav" data-view="automation">AI & tích hợp</button>
+    </nav>
+
+    <div class="sidebar-foot">
+        <span>Hotline đường dây nóng</span>
+        <strong>0912.186.586</strong>
+    </div>
+</aside>
+
+<main class="app">
+    <header class="topbar">
+        <div>
+            <h1 id="page-title">Phân hệ</h1>
+            <p id="page-subtitle">XE ĐIỆN CHUẨN PHÁT - Hệ thống xe điện, xe máy 50cc TOP 1 Việt Nam.</p>
+        </div>
+        <div class="top-actions">
+            <input id="global-search" placeholder="Tìm xe, khách hàng, serial...">
+            <span id="signed-user" class="status waiting">Chưa đăng nhập</span>
+            <button id="logout-button" class="ghost">Đăng xuất</button>
+            <span id="api-status" class="status waiting">API: đang kiểm tra</span>
+        </div>
+    </header>
+
+    <section id="dashboard" class="view active">
+        <section class="module-board">
+            <div class="module-head">
+                <div>
+                    <h2>Phân hệ</h2>
+                    <p>Chọn nhanh đúng khu vực làm việc giống phần mềm quản trị chuyên nghiệp.</p>
+                </div>
+                <input id="module-search" placeholder="Tìm kiếm phân hệ...">
+            </div>
+            <div class="module-columns">
+                <article class="module-column">
+                    <div class="module-title"><span class="module-icon cyan">LV</span><strong>Đã ghim</strong></div>
+                    <button type="button" class="module-link" data-go-view="dashboard"><span class="mini-icon">LV</span><span><strong>Bàn làm việc</strong><small>Tổng quan vận hành</small></span><em>Ghim</em></button>
+                    <button type="button" class="module-link" data-go-view="pos"><span class="mini-icon">BH</span><span><strong>Bán hàng</strong><small>Lập hóa đơn, đặt cọc</small></span><em>Ghim</em></button>
+                    <button type="button" class="module-link" data-go-view="customers"><span class="mini-icon">KH</span><span><strong>Khách hàng</strong><small>CRM, lịch sử mua</small></span><em>Ghim</em></button>
+                    <button type="button" class="module-link" data-go-view="inventory"><span class="mini-icon">KX</span><span><strong>Kho xe</strong><small>Serial, IMEI, tồn kho</small></span><em>Ghim</em></button>
+                    <button type="button" class="module-link" data-go-view="accounting"><span class="mini-icon">KT</span><span><strong>Kế toán</strong><small>Thu chi, công nợ</small></span><em>Ghim</em></button>
+                    <button type="button" class="module-link" data-go-view="reports"><span class="mini-icon">BC</span><span><strong>Báo cáo</strong><small>Doanh thu, lợi nhuận</small></span><em>Ghim</em></button>
+                </article>
+
+                <article class="module-column">
+                    <div class="module-title"><span class="module-icon purple">MK</span><strong>Marketing</strong></div>
+                    <button type="button" class="module-link" data-go-view="marketing"><span class="mini-icon">VC</span><span><strong>Khuyến mại</strong><small>Voucher, mã giảm giá</small></span></button>
+                    <button type="button" class="module-link" data-go-view="channels"><span class="mini-icon">MX</span><span><strong>Mạng xã hội</strong><small>Zalo, Facebook, TikTok</small></span></button>
+                    <button type="button" class="module-link" data-go-view="customers"><span class="mini-icon">CS</span><span><strong>Chăm sóc khách</strong><small>Điểm, hạng, sinh nhật</small></span></button>
+                    <button type="button" class="module-link" data-go-view="automation"><span class="mini-icon">AI</span><span><strong>Tự động hóa</strong><small>Nhắc nợ, bảo hành</small></span></button>
+                </article>
+
+                <article class="module-column">
+                    <div class="module-title"><span class="module-icon blue">BH</span><strong>Bán hàng</strong></div>
+                    <button type="button" class="module-link" data-go-view="pos"><span class="mini-icon">HD</span><span><strong>Hóa đơn</strong><small>Tiền mặt, QR, trả góp</small></span></button>
+                    <button type="button" class="module-link" data-go-view="pos"><span class="mini-icon">DH</span><span><strong>Đơn hàng</strong><small>Phiếu bán xe</small></span></button>
+                    <button type="button" class="module-link" data-go-view="customers"><span class="mini-icon">LK</span><span><strong>Loại khách hàng</strong><small>VIP, tiềm năng</small></span></button>
+                    <button type="button" class="module-link" data-go-view="channels"><span class="mini-icon">TN</span><span><strong>Tin nhắn</strong><small>Lead từ kênh bán</small></span></button>
+                </article>
+
+                <article class="module-column">
+                    <div class="module-title"><span class="module-icon orange">HT</span><strong>Hỗ trợ</strong></div>
+                    <button type="button" class="module-link" data-go-view="service"><span class="mini-icon">BH</span><span><strong>Phiếu bảo hành</strong><small>Sửa chữa, hẹn trả</small></span></button>
+                    <button type="button" class="module-link" data-go-view="purchases"><span class="mini-icon">MH</span><span><strong>Yêu cầu mua hàng</strong><small>Nhập hàng, NCC</small></span></button>
+                    <button type="button" class="module-link" data-go-view="inventory"><span class="mini-icon">CK</span><span><strong>Chuyển kho</strong><small>Điều chuyển chi nhánh</small></span></button>
+                    <button type="button" class="module-link" data-go-view="branches"><span class="mini-icon">CN</span><span><strong>Chi nhánh</strong><small>Kho theo điểm bán</small></span></button>
+                </article>
+
+                <article class="module-column">
+                    <div class="module-title"><span class="module-icon green">DM</span><strong>Danh mục</strong></div>
+                    <button type="button" class="module-link" data-go-view="products"><span class="mini-icon">HH</span><span><strong>Hàng hóa</strong><small>Xe, model, màu sắc</small></span></button>
+                    <button type="button" class="module-link" data-go-view="suppliers"><span class="mini-icon">NC</span><span><strong>Nhà cung cấp</strong><small>Công nợ, đơn nhập</small></span></button>
+                    <button type="button" class="module-link" data-go-view="accounting"><span class="mini-icon">TK</span><span><strong>Tài khoản kế toán</strong><small>Sổ cái, tài khoản</small></span></button>
+                    <button type="button" class="module-link" data-go-view="users"><span class="mini-icon">PQ</span><span><strong>Phân quyền</strong><small>Từng tài khoản</small></span></button>
+                </article>
+
+                <article class="module-column">
+                    <div class="module-title"><span class="module-icon pink">LK</span><strong>Liên kết</strong></div>
+                    <button type="button" class="module-link" data-go-view="automation"><span class="mini-icon">AI</span><span><strong>Trợ thủ AI</strong><small>Dự báo, gợi ý nhập</small></span></button>
+                    <button type="button" class="module-link" data-go-view="channels"><span class="mini-icon">OA</span><span><strong>Zalo OA</strong><small>Nhắn khách tự động</small></span></button>
+                    <button type="button" class="module-link" data-go-view="accounting"><span class="mini-icon">QR</span><span><strong>QR Banking</strong><small>Thanh toán, đối soát</small></span></button>
+                    <button type="button" class="module-link" data-go-view="login-history"><span class="mini-icon">LS</span><span><strong>Nhật ký</strong><small>Lịch sử đăng nhập</small></span></button>
+                </article>
+            </div>
+        </section>
+
+        <section class="section-head dashboard-section-title">
+            <div><h2>Tình hình kinh doanh</h2><p>Các chỉ số chính của ChuanPhat trong ngày.</p></div>
+            <button type="button" data-go-view="reports">Xem báo cáo</button>
+        </section>
+        <div class="metrics">
+            <article><span>Doanh thu</span><strong id="today-revenue">0 đ</strong><small>Hóa đơn đã ghi nhận</small></article>
+            <article><span>Lợi nhuận tạm tính</span><strong id="profit-estimate">0 đ</strong><small>Thu trừ chi vận hành</small></article>
+            <article><span>Xe còn kho</span><strong id="stock-count">0</strong><small>Theo serial / IMEI</small></article>
+            <article><span>Khách hàng</span><strong id="customer-count">0</strong><small>CRM toàn hệ thống</small></article>
+        </div>
+        <section class="directory-board">
+            <div class="directory-head">
+                <h2>Danh mục</h2>
+                <p>Những danh mục gốc để tạo dữ liệu chuẩn trước khi bán hàng, nhập hàng và hạch toán.</p>
+            </div>
+            <div class="directory-grid">
+                <article>
+                    <h3>Đối tượng</h3>
+                    <button type="button" data-go-view="customers">Khách hàng</button>
+                    <button type="button" data-go-view="suppliers">Nhà cung cấp</button>
+                    <button type="button" data-go-view="users">Nhân viên / tài khoản</button>
+                    <button type="button" data-go-view="branches">Chi nhánh, phòng ban</button>
+                </article>
+                <article>
+                    <h3>Vật tư hàng hóa</h3>
+                    <button type="button" data-go-view="products">Vật tư hàng hóa</button>
+                    <button type="button" data-go-view="inventory">Kho</button>
+                    <button type="button" data-go-view="products">Nhóm xe, model, màu</button>
+                    <button type="button" data-go-view="purchases">Đơn vị nhập hàng</button>
+                </article>
+                <article>
+                    <h3>Tài khoản</h3>
+                    <button type="button" data-go-view="accounting">Hệ thống tài khoản</button>
+                    <button type="button" data-go-view="accounting">Sổ quỹ</button>
+                    <button type="button" data-go-view="accounting">Công nợ</button>
+                    <button type="button" data-go-view="users">Quyền truy cập</button>
+                </article>
+                <article>
+                    <h3>Thuế & báo cáo</h3>
+                    <button type="button" data-go-view="accounting">VAT</button>
+                    <button type="button" data-go-view="reports">Báo cáo thu chi</button>
+                    <button type="button" data-go-view="reports">Báo cáo tồn kho</button>
+                    <button type="button" data-go-view="reports">Báo cáo công nợ</button>
+                </article>
+            </div>
+        </section>
+        <div class="dashboard-grid">
+            <article class="panel wide">
+                <div class="panel-head"><h2>Doanh thu theo chi nhánh</h2><span class="badge">Realtime</span></div>
+                <div id="branch-chart" class="bar-chart"></div>
+            </article>
+            <article class="panel">
+                <div class="panel-head"><h2>Cảnh báo tồn kho</h2><span class="badge danger">Thấp</span></div>
+                <div id="low-stock-list" class="stack-list"></div>
+            </article>
+            <article class="panel">
+                <div class="panel-head"><h2>Lead mới</h2><span class="badge">Inbox</span></div>
+                <div id="latest-leads" class="stack-list"></div>
+            </article>
+        </div>
+    </section>
+
+    <section id="pos" class="view">
+        <div class="split">
+            <article class="panel">
+                <div class="panel-head"><h2>Tạo hóa đơn</h2><span class="badge success">POS</span></div>
+                <form id="sales-form" class="form single">
+                    <label>Chi nhánh<select name="branchId" id="sale-branch" required></select></label>
+                    <label>Khách hàng<input name="customerName" id="sale-customer-name" list="sale-customer-options" placeholder="Nhập tên khách hàng" required></label>
+                    <div class="form-row">
+                        <label>SĐT<input name="customerPhone" placeholder="Số điện thoại"></label>
+                        <label>Địa chỉ<input name="customerAddress" placeholder="Địa chỉ khách"></label>
+                    </div>
+                    <label>Xe trong kho<select name="inventoryItemId" id="sale-inventory" required></select></label>
+                    <label>Thanh toán
+                        <select name="paymentMethod">
+                            <option value="CASH">Tiền mặt</option>
+                            <option value="BANK_TRANSFER">Chuyển khoản</option>
+                            <option value="QR_BANKING">QR Banking</option>
+                            <option value="EWALLET">Ví điện tử</option>
+                            <option value="INSTALLMENT">Trả góp</option>
+                        </select>
+                    </label>
+                    <div class="form-row">
+                        <label>Voucher<select name="voucherCode" id="sale-voucher"></select></label>
+                        <label>Đặt cọc<input name="depositAmount" type="number" value="0"></label>
+                    </div>
+                    <div class="form-row">
+                        <label>Giảm giá<input name="discount" type="number" value="0"></label>
+                        <label>Thuế VAT<input name="tax" type="number" value="0"></label>
+                    </div>
+                    <button class="primary">Lập hóa đơn</button>
+                </form>
+                <datalist id="sale-customer-options"></datalist>
+            </article>
+            <article class="panel receipt">
+                <div class="panel-head">
+                    <div><h2>Phiếu thanh toán</h2><span id="receipt-status" class="muted">Chưa lập hóa đơn</span></div>
+                    <button type="button" id="print-receipt" class="ghost">In phiếu</button>
+                </div>
+                <div id="receipt-preview" class="receipt-box"></div>
+            </article>
+        </div>
+    </section>
+
+    <section id="accounting" class="view">
+        <div class="section-head">
+            <div><h2>Kế toán tài chính</h2><p>Thu chi, công nợ, sổ quỹ, ngân hàng và tài khoản kế toán.</p></div>
+            <div class="head-actions"><button data-open="accounting-form">Thêm bút toán</button><button data-open="account-form">Thêm tài khoản</button></div>
+        </div>
+        <div class="metrics">
+            <article><span>Tổng thu</span><strong id="accounting-income">0 đ</strong><small>Doanh thu, thu tiền</small></article>
+            <article><span>Tổng chi</span><strong id="accounting-expense">0 đ</strong><small>Vận hành, giá vốn</small></article>
+            <article><span>Phải thu</span><strong id="accounting-receivable">0 đ</strong><small>Công nợ khách hàng</small></article>
+            <article><span>Phải trả</span><strong id="accounting-payable">0 đ</strong><small>Công nợ nhà cung cấp</small></article>
+        </div>
+        <form id="accounting-form" class="form hidden">
+            <input name="entryDate" type="date">
+            <select name="type"><option value="INCOME">Thu tiền</option><option value="EXPENSE">Chi tiền</option><option value="RECEIVABLE">Phải thu</option><option value="PAYABLE">Phải trả</option><option value="TRANSFER">Chuyển quỹ</option></select>
+            <input name="category" placeholder="Hạng mục">
+            <select name="branchId" id="accounting-branch"></select>
+            <input name="partnerName" placeholder="Đối tượng">
+            <input name="amount" type="number" placeholder="Số tiền" required>
+            <select name="paymentMethod"><option value="CASH">Tiền mặt</option><option value="BANK_TRANSFER">Chuyển khoản</option><option value="QR_BANKING">QR Banking</option><option value="EWALLET">Ví điện tử</option><option value="INSTALLMENT">Trả góp</option></select>
+            <select name="status"><option value="POSTED">Đã ghi sổ</option><option value="DRAFT">Nháp</option><option value="PAID">Đã thanh toán</option><option value="PARTIAL">Một phần</option></select>
+            <textarea name="description" placeholder="Nội dung nghiệp vụ"></textarea>
+            <button>Lưu bút toán</button>
+        </form>
+        <form id="account-form" class="form hidden">
+            <input name="accountCode" placeholder="Mã TK" required>
+            <input name="accountName" placeholder="Tên tài khoản" required>
+            <select name="accountType"><option value="ASSET">Tài sản</option><option value="LIABILITY">Nợ phải trả</option><option value="REVENUE">Doanh thu</option><option value="EXPENSE">Chi phí</option><option value="EQUITY">Vốn</option></select>
+            <input name="balance" type="number" placeholder="Số dư">
+            <button>Lưu tài khoản</button>
+        </form>
+        <div class="dashboard-grid">
+            <article class="panel wide"><div class="panel-head"><h2>Nhật ký chung</h2><span class="badge">Sổ kế toán</span></div><div id="accounting-list" class="data-table"></div></article>
+            <article class="panel"><div class="panel-head"><h2>Hệ thống tài khoản</h2><span class="badge">COA</span></div><div id="account-list" class="stack-list"></div></article>
+        </div>
+    </section>
+
+    <section id="users" class="view">
+        <div class="section-head">
+            <div><h2>Tài khoản & phân quyền</h2><p>Admin, kế toán, thu ngân và quản lý chi nhánh.</p></div>
+            <button data-open="user-form">Thêm người dùng</button>
+        </div>
+        <form id="login-form" class="form">
+            <input name="username" placeholder="Tài khoản" value="admin">
+            <input name="password" type="password" placeholder="Mật khẩu" value="123456">
+            <button>Đăng nhập</button>
+        </form>
+        <form id="user-form" class="form hidden">
+            <input name="username" placeholder="Username" required>
+            <input name="password" type="password" placeholder="Mật khẩu mặc định">
+            <input name="displayName" placeholder="Họ tên" required>
+            <input name="phone" placeholder="SĐT">
+            <select name="role"><option value="ADMIN">Admin</option><option value="ACCOUNTANT">Kế toán</option><option value="CASHIER">Thu ngân</option><option value="BRANCH_MANAGER">Quản lý chi nhánh</option><option value="SALES">Bán hàng</option><option value="SERVICE">Dịch vụ</option></select>
+            <select name="branchId" id="user-branch"></select>
+            <button>Lưu người dùng</button>
+        </form>
+        <div class="dashboard-grid">
+            <article class="panel wide"><div class="panel-head"><h2>Người dùng</h2><span class="badge">Role</span></div><div id="user-list" class="data-table"></div></article>
+            <article class="panel wide">
+                <div class="panel-head">
+                    <h2>Phân quyền hạng mục</h2>
+                    <select id="permission-user"></select>
+                </div>
+                <div id="permission-list" class="permission-grid"></div>
+                <div class="permission-actions">
+                    <span id="permission-note" class="muted">Chọn tài khoản và bật/tắt từng hạng mục.</span>
+                    <button id="save-permissions" type="button">Lưu phân quyền</button>
+                </div>
+            </article>
+            <article class="panel"><div class="panel-head"><h2>Nhật ký hoạt động</h2><span class="badge">Log</span></div><div id="activity-log-list" class="stack-list"></div></article>
+        </div>
+    </section>
+
+    <section id="login-history" class="view">
+        <div class="section-head">
+            <div><h2>Lịch sử đăng nhập</h2><p>Theo dõi tài khoản nào đã đăng nhập, đăng xuất và thời điểm thao tác.</p></div>
+            <button id="refresh-login-history">Làm mới</button>
+        </div>
+        <div class="metrics">
+            <article><span>Lượt đăng nhập</span><strong id="login-count">0</strong><small>Tổng lần đăng nhập ghi nhận</small></article>
+            <article><span>Lượt đăng xuất</span><strong id="logout-count">0</strong><small>Tổng lần đăng xuất ghi nhận</small></article>
+            <article><span>Người gần nhất</span><strong id="last-login-user">-</strong><small>Tài khoản thao tác gần nhất</small></article>
+            <article><span>Trạng thái</span><strong id="login-history-status">Offline</strong><small>Dữ liệu từ activity_logs</small></article>
+        </div>
+        <div id="login-history-list" class="data-table"></div>
+    </section>
+
+    <section id="branches" class="view">
+        <div class="section-head"><div><h2>Chi nhánh</h2><p>Showroom, xưởng dịch vụ và doanh thu từng điểm bán.</p></div><button data-open="branch-form">Thêm chi nhánh</button></div>
+        <form id="branch-form" class="form hidden">
+            <input name="name" placeholder="Tên chi nhánh" required>
+            <input name="address" placeholder="Địa chỉ" required>
+            <input name="phone" placeholder="Số điện thoại">
+            <input name="latitude" placeholder="Vĩ độ">
+            <input name="longitude" placeholder="Kinh độ">
+            <button>Lưu chi nhánh</button>
+        </form>
+        <div id="branch-list" class="data-table"></div>
+    </section>
+
+    <section id="products" class="view">
+        <div class="section-head"><div><h2>Sản phẩm</h2><p>Danh mục xe, màu sắc, QR, giá và thông số kỹ thuật.</p></div><button data-open="product-form">Thêm sản phẩm</button></div>
+        <form id="product-form" class="form hidden">
+            <input name="name" placeholder="Tên xe" required>
+            <input name="brand" placeholder="Hãng" required>
+            <input name="model" placeholder="Model">
+            <input name="color" placeholder="Màu sắc">
+            <select name="category"><option value="E_MOTORBIKE">Xe máy điện</option><option value="E_BICYCLE">Xe đạp điện</option><option value="FIFTY_CC">Xe máy 50cc</option><option value="ACCESSORY">Phụ kiện</option></select>
+            <input name="battery" placeholder="Pin / động cơ">
+            <input name="warrantyMonths" type="number" placeholder="Bảo hành tháng" value="36">
+            <input name="price" type="number" placeholder="Giá bán" required>
+            <input name="qrCode" placeholder="Mã QR / mã hàng">
+            <input name="imageUrl" placeholder="URL ảnh">
+            <textarea name="specifications" placeholder="Thông số kỹ thuật"></textarea>
+            <button>Lưu sản phẩm</button>
+        </form>
+        <div id="product-list" class="product-grid"></div>
+    </section>
+
+    <section id="inventory" class="view">
+        <div class="section-head"><div><h2>Kho xe</h2><p>Nhập kho, chuyển kho, kiểm kê và lịch sử nhập xuất.</p></div><div class="head-actions"><button data-open="inventory-form">Nhập xe</button><button data-open="stocktake-form">Kiểm kê</button></div></div>
+        <form id="inventory-form" class="form hidden">
+            <select name="branchId" id="inventory-branch" required></select>
+            <select name="productId" id="inventory-product" required></select>
+            <input name="serialNumber" placeholder="Serial" required>
+            <input name="imei" placeholder="IMEI">
+            <input name="vehicleCode" placeholder="Mã xe">
+            <input name="costPrice" type="number" placeholder="Giá vốn">
+            <button>Nhập kho</button>
+        </form>
+        <form id="stocktake-form" class="form hidden">
+            <select name="branchId" id="stocktake-branch" required></select>
+            <select name="productId" id="stocktake-product" required></select>
+            <input name="actualQuantity" type="number" placeholder="Tồn thực tế" required>
+            <input name="note" placeholder="Ghi chú kiểm kê">
+            <button>Lưu kiểm kê</button>
+        </form>
+        <div class="dashboard-grid">
+            <article class="panel wide"><div class="panel-head"><h2>Tồn kho serial</h2><span class="badge">Realtime</span></div><div id="inventory-list" class="data-table"></div></article>
+            <article class="panel"><div class="panel-head"><h2>Lịch sử kho</h2><span class="badge">FIFO</span></div><div id="movement-list" class="stack-list"></div></article>
+            <article class="panel"><div class="panel-head"><h2>Kiểm kê</h2><span class="badge">Stocktake</span></div><div id="stocktake-list" class="stack-list"></div></article>
+        </div>
+    </section>
+
+    <section id="purchases" class="view">
+        <div class="section-head"><div><h2>Nhập hàng</h2><p>Đơn nhập hàng, công nợ và hạn thanh toán nhà cung cấp.</p></div><button data-open="purchase-form">Tạo đơn nhập</button></div>
+        <form id="purchase-form" class="form hidden">
+            <input name="supplierName" list="supplier-options" placeholder="Tên nhà cung cấp" required>
+            <input name="branchName" list="branch-options" placeholder="Chi nhánh nhập" required>
+            <input name="productName" list="product-options" placeholder="Tên xe / sản phẩm" required>
+            <input name="productColor" placeholder="Màu sắc">
+            <input name="quantity" type="number" placeholder="Số lượng" value="1">
+            <input name="unitCost" type="number" placeholder="Giá nhập" required>
+            <input name="paidAmount" type="number" placeholder="Đã trả" value="0">
+            <input name="dueDate" type="date">
+            <button>Lưu đơn nhập</button>
+        </form>
+        <datalist id="supplier-options"></datalist>
+        <datalist id="branch-options"></datalist>
+        <datalist id="product-options"></datalist>
+        <div id="purchase-list" class="data-table"></div>
+    </section>
+
+    <section id="suppliers" class="view">
+        <div class="section-head"><div><h2>Nhà cung cấp</h2><p>Thông tin NCC, lịch sử nhập hàng và công nợ.</p></div><button data-open="supplier-form">Thêm NCC</button></div>
+        <form id="supplier-form" class="form hidden">
+            <input name="name" placeholder="Tên NCC" required>
+            <input name="phone" placeholder="SĐT">
+            <input name="email" placeholder="Email">
+            <input name="address" placeholder="Địa chỉ">
+            <input name="taxCode" placeholder="Mã số thuế">
+            <input name="contactPerson" placeholder="Người liên hệ">
+            <input name="debtBalance" type="number" placeholder="Công nợ">
+            <button>Lưu NCC</button>
+        </form>
+        <div id="supplier-list" class="data-table"></div>
+    </section>
+
+    <section id="customers" class="view">
+        <div class="section-head"><div><h2>CRM khách hàng</h2><p>Hồ sơ, hạng thành viên, điểm tích lũy và nguồn khách.</p></div><button data-open="customer-form">Thêm khách</button></div>
+        <form id="customer-form" class="form hidden">
+            <input name="fullName" placeholder="Họ tên" required>
+            <input name="phone" placeholder="Số điện thoại" required>
+            <input name="email" placeholder="Email">
+            <input name="address" placeholder="Địa chỉ">
+            <input name="birthday" type="date">
+            <input name="loyaltyPoints" type="number" placeholder="Điểm tích lũy" value="0">
+            <select name="tier"><option value="NEW">Mới</option><option value="POTENTIAL">Tiềm năng</option><option value="VIP">VIP</option></select>
+            <input name="source" placeholder="Nguồn: Zalo, Facebook, TikTok">
+            <button>Lưu khách hàng</button>
+        </form>
+        <div id="customer-list" class="data-table"></div>
+    </section>
+
+    <section id="service" class="view">
+        <div class="section-head"><div><h2>Bảo hành & sửa chữa</h2><p>Phiếu bảo hành, lịch sửa chữa, linh kiện và thông báo khách.</p></div><button data-open="service-form">Tạo phiếu</button></div>
+        <form id="service-form" class="form hidden">
+            <select name="branchId" id="service-branch" required></select>
+            <select name="customerId" id="service-customer"></select>
+            <select name="inventoryItemId" id="service-inventory"></select>
+            <select name="status"><option value="RECEIVED">Tiếp nhận</option><option value="DIAGNOSING">Kiểm tra</option><option value="WAITING_PARTS">Chờ linh kiện</option><option value="REPAIRING">Đang sửa</option><option value="COMPLETED">Hoàn tất</option><option value="RETURNED">Đã trả xe</option></select>
+            <input name="issueDescription" placeholder="Lỗi ghi nhận">
+            <input name="diagnosis" placeholder="Chẩn đoán">
+            <input name="replacementParts" placeholder="Linh kiện thay thế">
+            <input name="serviceCost" type="number" placeholder="Chi phí">
+            <input name="appointmentDate" type="date">
+            <input name="warrantyUntil" type="date">
+            <button>Lưu phiếu</button>
+        </form>
+        <div id="service-list" class="data-table"></div>
+    </section>
+
+    <section id="marketing" class="view">
+        <div class="section-head"><div><h2>Marketing & voucher</h2><p>Voucher, khuyến mãi, remarketing và nhắc bảo dưỡng.</p></div><button data-open="voucher-form">Thêm voucher</button></div>
+        <form id="voucher-form" class="form hidden">
+            <input name="code" placeholder="Mã voucher" required>
+            <input name="name" placeholder="Tên chương trình" required>
+            <select name="type"><option value="FIXED_AMOUNT">Giảm tiền</option><option value="PERCENTAGE">Giảm %</option></select>
+            <input name="value" type="number" placeholder="Giá trị" required>
+            <input name="minOrderValue" type="number" placeholder="Đơn tối thiểu">
+            <input name="startDate" type="date">
+            <input name="endDate" type="date">
+            <input name="usageLimit" type="number" placeholder="Số lượt">
+            <button>Lưu voucher</button>
+        </form>
+        <div id="voucher-list" class="data-table"></div>
+    </section>
+
+    <section id="channels" class="view">
+        <div class="section-head"><div><h2>Inbox đa kênh</h2><p>Lead từ Zalo OA, Facebook Messenger và TikTok.</p></div><button data-open="conversation-form">Thêm hội thoại</button></div>
+        <form id="conversation-form" class="form hidden">
+            <select name="channel"><option value="ZALO_OA">Zalo OA</option><option value="FACEBOOK">Facebook</option><option value="TIKTOK">TikTok</option></select>
+            <input name="customerName" placeholder="Tên khách">
+            <input name="customerPhone" placeholder="SĐT">
+            <input name="leadTag" placeholder="Tag">
+            <textarea name="message" placeholder="Nội dung tin nhắn"></textarea>
+            <button>Lưu hội thoại</button>
+        </form>
+        <div id="conversation-board" class="kanban"></div>
+    </section>
+
+    <section id="reports" class="view">
+        <div class="section-head"><div><h2>Báo cáo & thống kê</h2><p>Doanh thu, lợi nhuận, tồn kho, công nợ và nguồn khách.</p></div><button id="refresh-report">Làm mới</button></div>
+        <div class="dashboard-grid">
+            <article class="panel wide"><div class="panel-head"><h2>Top sản phẩm bán chạy</h2><span class="badge">Sales</span></div><div id="top-products" class="bar-chart"></div></article>
+            <article class="panel"><div class="panel-head"><h2>Nguồn khách</h2><span class="badge">CRM</span></div><div id="source-report" class="stack-list"></div></article>
+            <article class="panel"><div class="panel-head"><h2>Công nợ</h2><span class="badge">Debt</span></div><div id="debt-report" class="stack-list"></div></article>
+        </div>
+    </section>
+
+    <section id="automation" class="view">
+        <div class="section-head"><div><h2>AI & tích hợp</h2><p>VietQR, VNPay, Momo, Google Maps, Firebase, AI dự báo và chatbot.</p></div><span class="badge">Roadmap</span></div>
+        <div class="module-grid" id="automation-list"></div>
+    </section>
+</main>
+
+<div id="toast" class="toast hidden"></div>
+<script src="app.js"></script>
+</body>
+</html>
